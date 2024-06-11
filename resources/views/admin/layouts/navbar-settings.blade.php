@@ -88,6 +88,12 @@
             <span class="menu-title">Driver</span>
         </a>
     </li>
+    <li class="nav-item @yield('booking') rounded">
+        <a class="nav-link" href="{{ route('admin.booking.show') }}">
+          <i class="icon-layout menu-icon"></i>
+            <span class="menu-title">Booking</span>
+        </a>
+    </li>
     <li class="nav-item @yield('expense') rounded">
       <a class="nav-link" href="{{ route('admin.expense.show') }}">
         <i class="icon-columns menu-icon"></i>

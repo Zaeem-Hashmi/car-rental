@@ -33,7 +33,7 @@ class CreateBookingsTable extends Migration
             $table->string('dropoffCity')->nullable();
             $table->date('dropoffDate')->nullable();
             $table->time('dropoffTime')->nullable();
-            $table->enum('status', ['assigned', 'unassigned','cancel'])->default('Unassigned');
+            $table->enum('status', ['assigned', 'unassigned','cancel','complete'])->default('Unassigned');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
             $table->foreign('driver_id')->references('id')->on('users')->onDelete("cascade");

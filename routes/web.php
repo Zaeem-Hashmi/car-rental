@@ -36,6 +36,7 @@ Route::group(["prefix"=>"booking","middleware"=>"auth"],function(){
         Route::post('/store',[BookingController::class,'storeByAdmin'])->name('admin.booking.store');
         Route::get('/{booking}/edit',[BookingController::class,'edit'])->name('admin.booking.edit');
         Route::post('/update',[BookingController::class,'update'])->name('admin.booking.update');
+        Route::post('/status',[BookingController::class,'status'])->name('admin.booking.status');
     });
     Route::prefix("client")->group(function(){
         Route::get('/{user}',[BookingController::class,'showByUserId'])->name('client.booking.show');
@@ -106,6 +107,7 @@ Route::group(["prefix"=>"administration","middleware"=>"auth"],function(){
     Route::prefix("users")->group(function(){
         Route::get('/',[AdministrationController::class,'show'])->name('administaration.user.show');
         Route::post('/',[AdministrationController::class,'ajax'])->name('administaration.user.ajax');
+        Route::post("/update",[AdministrationController::class,'userUpdate'])->name('administaration.user.update');
     });
 });
 

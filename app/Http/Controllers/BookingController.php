@@ -11,7 +11,7 @@ class BookingController extends Controller
 {
     public function show()
     {
-
+        return view('admin.booking.show');
     }
     public function ajax()
     {
@@ -71,4 +71,16 @@ class BookingController extends Controller
 
         $booking->save();
     }
+    public function status(Request $request)
+    {
+        $booking = Booking::find($request->booking_id);
+        $booking->status = $request->status;
+        $booking->save();
+
+        return response()->json([
+            "status"=>true,
+            "message"=>"Ride status updated to ".$request->status
+        ]);
+    }
 }
+
