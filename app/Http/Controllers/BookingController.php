@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class BookingController extends Controller
 {
@@ -14,7 +15,10 @@ class BookingController extends Controller
     }
     public function ajax()
     {
-
+        $query = Booking::query();
+        $query = $query->with("driver","passenger");
+        return DataTables::eloquent($query)
+            ->toJson();
     }
     public function showByUserId(User $user)
     {
@@ -26,6 +30,7 @@ class BookingController extends Controller
     }
     public function store(Request $request)
     {
+        dd($request->all());
         $validate = $request->validate([
 
         ]);

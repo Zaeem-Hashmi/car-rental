@@ -33,8 +33,8 @@
             </div>
 
             <div class="mb-3">
-                <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username"
-                    placeholder="Username" autofocus required value="{{ old('username') }}">
+                <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                    placeholder="Email" autofocus required value="{{ old('email') }}">
 
                 @error('username')
                     <div class="invalid-feedback">

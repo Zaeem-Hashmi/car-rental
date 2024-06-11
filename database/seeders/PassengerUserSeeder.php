@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class AdminUserSeeder extends Seeder
+class PassengerUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +16,11 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         $user  = User::firstOrNew([
-            "email"=>"admin@urbanride.com"
+            "email"=>"passenger@urbanride.com"
         ]);
         
-        $user->role_id = User::ADMIN_ROLE;
-        $user->username = "admin";
+        $user->role_id = User::PASSENGER_ROLE;
+        $user->username = "passenger";
         $user->password = Hash::make("password");
         $user->save();
     }

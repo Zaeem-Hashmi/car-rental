@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory;
+    public function driver()
+    {
+        return $this->belongsTo(User::class,"user_id");
+    }
 }

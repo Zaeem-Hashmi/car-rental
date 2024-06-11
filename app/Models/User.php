@@ -16,33 +16,27 @@ class User extends Authenticatable
     const DRIVER_ROLE = 2;
     const PASSENGER_ROLE = 3;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'email',
         'username',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
+    }
+    public function expense()
+    {
+        return $this->hasMany(Expense::class);
+    }
 }

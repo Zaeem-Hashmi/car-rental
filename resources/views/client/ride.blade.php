@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
-                    <form action="/booking" method="POST" style="margin-top: 70px;max-width: 1000px;">
+                    <form action="{{ route('client.booking.store') }}" method="POST" style="margin-top: 70px;max-width: 1000px;">
                         @csrf
 
                         <h2 class="text-center">Book A Ride</h2>

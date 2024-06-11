@@ -106,18 +106,18 @@ Route::group(["prefix"=>"booking","middleware"=>"auth"],function(){
 
 Route::group(["prefix"=>"expense","middleware"=>"auth"],function(){
     Route::prefix("driver")->group(function(){
-        Route::get('/{user}',[ExpenseController::class,'show'])->name('driver.booking.show');
-        Route::post('/{user}',[ExpenseController::class,'ajax'])->name('driver.booking.ajax');
-        Route::post('/store',[ExpenseController::class,'store'])->name('driver.booking.store');
-        Route::get('/{booking}/edit',[ExpenseController::class,'edit'])->name('driver.booking.edit');
-        Route::post('/update',[ExpenseController::class,'update'])->name('driver.booking.update');
+        Route::get('/{user}',[ExpenseController::class,'show'])->name('driver.expense.show');
+        Route::post('/{user}',[ExpenseController::class,'ajax'])->name('driver.expense.ajax');
+        Route::post('/store',[ExpenseController::class,'store'])->name('driver.expense.store');
+        Route::get('/{expense}/edit',[ExpenseController::class,'edit'])->name('driver.expense.edit');
+        Route::post('/update',[ExpenseController::class,'update'])->name('driver.expense.update');
     });
     Route::prefix("admin")->group(function(){
-        Route::get('/',[ExpenseController::class,'adminShow'])->name('admin.booking.show');
-        Route::post('/',[ExpenseController::class,'adminAjax'])->name('admin.booking.ajax');
-        Route::post('/store',[ExpenseController::class,'adminStore'])->name('admin.booking.store');
-        Route::get('/{booking}/edit',[ExpenseController::class,'adminEdit'])->name('admin.booking.edit');
-        Route::post('/update',[ExpenseController::class,'adminUpdate'])->name('admin.booking.update');
+        Route::get('/',[ExpenseController::class,'adminShow'])->name('admin.expense.show');
+        Route::post('/',[ExpenseController::class,'adminAjax'])->name('admin.expense.ajax');
+        Route::post('/store',[ExpenseController::class,'adminStore'])->name('admin.expense.store');
+        Route::get('/{expense}/edit',[ExpenseController::class,'adminEdit'])->name('admin.expense.edit');
+        Route::post('/update',[ExpenseController::class,'adminUpdate'])->name('admin.expense.update');
     });
 });
 
@@ -130,3 +130,6 @@ Route::group(["prefix"=>"user","middleware"=>"auth"],function(){
         Route::post('/update',[UserController::class,'update'])->name('user.admin.update');
     });
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

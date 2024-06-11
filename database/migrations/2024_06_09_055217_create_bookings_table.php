@@ -16,6 +16,7 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("user_id")->nullable();
+            $table->unsignedBigInteger("driver_id")->nullable();
 
             $table->string('bookingRefNo')->nullable();
             $table->string('pickupUnitNumber')->nullable();
@@ -32,9 +33,10 @@ class CreateBookingsTable extends Migration
             $table->string('dropoffCity')->nullable();
             $table->date('dropoffDate')->nullable();
             $table->time('dropoffTime')->nullable();
-            $table->enum('status', ['Assigned', 'Unassigned','cancel'])->default('Unassigned');
+            $table->enum('status', ['assigned', 'unassigned','cancel'])->default('Unassigned');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete("cascade");
+            $table->foreign('driver_id')->references('id')->on('users')->onDelete("cascade");
             $table->timestamps();
         });
     }

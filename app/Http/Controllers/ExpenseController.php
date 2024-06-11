@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ExpenseController extends Controller
 {
@@ -27,7 +28,11 @@ class ExpenseController extends Controller
         
     }
     public function adminAjax() {
-        
+        $expense = Expense::query();
+        $expense = $expense->with('driver');
+
+        return DataTables::eloquent($expense)
+            ->toJson();
     }
     public function adminStore(Request $request) {
         
