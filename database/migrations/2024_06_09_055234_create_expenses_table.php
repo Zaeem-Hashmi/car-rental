@@ -18,7 +18,7 @@ class CreateExpensesTable extends Migration
             $table->unsignedBigInteger("user_id")->nullable();
 
             $table->string('expenseType')->nullable();
-            $table->string('expenseAmount')->nullable();
+            $table->decimal('expenseAmount',10,2)->default(0.00);
             $table->string('expenseDescription')->nullable();
 
             $table->foreign("user_id")->references('id')->on("users")->onDelete("cascade");

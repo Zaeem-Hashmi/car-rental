@@ -16,12 +16,12 @@ class User extends Authenticatable
     const DRIVER_ROLE = 2;
     const PASSENGER_ROLE = 3;
 
-    protected $fillable = [
-        'email',
-        'username',
-        'password',
-    ];
-
+    // protected $fillable = [
+    //     'email',
+    //     'username',
+    //     'password',
+    // ];
+    protected $guarded = [];
     protected $hidden = [
         'password',
         'remember_token',

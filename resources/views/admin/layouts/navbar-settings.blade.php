@@ -13,11 +13,10 @@
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-basic">
-          <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="">List</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Create</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Expense</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Reports</a></li>
+          <ul class="rounded-bottom nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{ route('driver.admin.show') }}">List</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('driver.admin.create') }}">Create</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.expense.show') }}">Expense</a></li>
           </ul>
         </div>
       </li>
@@ -28,10 +27,9 @@
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="form-elements">
-          <ul class="nav flex-column sub-menu">
+          <ul class="rounded-bottom nav flex-column sub-menu">
             <li class="nav-item"><a class="nav-link" href="">List</a></li>
             <li class="nav-item"><a class="nav-link" href="">Create</a></li>
-            <li class="nav-item"><a class="nav-link" href="">Reports</a></li>
           </ul>
         </div>
       </li>
@@ -42,10 +40,9 @@
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="charts">
-          <ul class="nav flex-column sub-menu">
+          <ul class="rounded-bottom nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="">List</a></li>
             <li class="nav-item"> <a class="nav-link" href="">Create</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Reports</a></li>
           </ul>
         </div>
       </li>
@@ -56,10 +53,9 @@
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="tables">
-          <ul class="nav flex-column sub-menu">
+          <ul class="rounded-bottom nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="">List</a></li>
             <li class="nav-item"> <a class="nav-link" href="">Create</a></li>
-            <li class="nav-item"> <a class="nav-link" href="">Reports</a></li>
             <li class="nav-item"> <a class="nav-link" href="">Stats</a></li>
           </ul>
         </div>
@@ -71,7 +67,7 @@
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="icons">
-          <ul class="nav flex-column sub-menu">
+          <ul class="rounded-bottom nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="">User Management</a></li>
           </ul>
         </div>

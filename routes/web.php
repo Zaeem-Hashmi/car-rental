@@ -116,8 +116,10 @@ Route::group(["prefix"=>"expense","middleware"=>"auth"],function(){
         Route::get('/',[ExpenseController::class,'adminShow'])->name('admin.expense.show');
         Route::post('/',[ExpenseController::class,'adminAjax'])->name('admin.expense.ajax');
         Route::post('/store',[ExpenseController::class,'adminStore'])->name('admin.expense.store');
+        Route::get('/create',[ExpenseController::class,'adminCreate'])->name('admin.expense.create');
         Route::get('/{expense}/edit',[ExpenseController::class,'adminEdit'])->name('admin.expense.edit');
         Route::post('/update',[ExpenseController::class,'adminUpdate'])->name('admin.expense.update');
+        Route::get('/{expense}/delete',[ExpenseController::class,'adminDelete'])->name('admin.expense.delete');
     });
 });
 
@@ -128,6 +130,17 @@ Route::group(["prefix"=>"user","middleware"=>"auth"],function(){
         Route::post('/store',[UserController::class,'store'])->name('user.admin.store');
         Route::get('/{user}/edit',[UserController::class,'edit'])->name('user.admin.edit');
         Route::post('/update',[UserController::class,'update'])->name('user.admin.update');
+    });
+});
+Route::group(["prefix"=>"driver","middleware"=>"auth"],function(){
+    Route::prefix("admin")->group(function(){
+        Route::get('/',[DriverController::class,'show'])->name('driver.admin.show');
+        Route::post('/',[DriverController::class,'ajax'])->name('driver.admin.ajax');
+        Route::get('/create',[DriverController::class,'create'])->name('driver.admin.create');
+        Route::post('/store',[DriverController::class,'store'])->name('driver.admin.store');
+        Route::get('/{driver}/edit',[DriverController::class,'edit'])->name('driver.admin.edit');
+        Route::post('/update',[DriverController::class,'update'])->name('driver.admin.update');
+        Route::get('/{driver}/delete',[DriverController::class,'delete'])->name('driver.admin.delete');
     });
 });
 Auth::routes();
