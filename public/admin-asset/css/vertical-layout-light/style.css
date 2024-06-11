@@ -28597,6 +28597,12 @@ div.tagsinput span.tag a {
   position: relative;
 }
 
+.sidebar .nav .nav-item.active_nav > .nav-link {
+  background: #343a40;
+  position: relative;
+  color: white;
+}
+
 .sidebar .nav .nav-item.active > .nav-link i,
 .sidebar .nav .nav-item.active > .nav-link .menu-title,
 .sidebar .nav .nav-item.active > .nav-link .menu-arrow {
@@ -28641,7 +28647,9 @@ div.tagsinput span.tag a {
 .sidebar .nav:not(.sub-menu) > .nav-item.active {
   background: #343a40;
 }
-
+.sidebar .nav:not(.sub-menu) > .nav-item.active_nav {
+  background: #343a40;
+}
 .sidebar .nav.sub-menu {
   margin-bottom: 0;
   margin-top: 0;

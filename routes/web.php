@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ExpenseController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,62 +21,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/', function () {
-//     return view('home', [
-//         'title' => 'Cabs Online | Book A Taxi Ride With Us Today!']);
-// });
-
-// Route::get('/about', function () {
-//     return view('about', [
-//         'title' => 'About | Cabs Online']);
-// });
-
-// Route::resource('/booking', PassengerController::class);
-// Route::match(['get', 'post'], '/continue-booking', [PassengerController::class, 'continueBooking']);
-
-// Route::get('/cancel-booking', [PassengerController::class, 'cancelBooking']);
-
-// Route::get('/register', [RegisterController::class, 'index'])
-//     ->middleware('guest');
-// Route::post('/register', [RegisterController::class, 'store']);
-
-// Route::get('/login', [LoginController::class, 'index'])
-//     ->name('login')
-//     ->middleware('guest');
-// Route::post('/login', [LoginController::class, 'authenticate']);
-
-// Route::post('/logout', [LoginController::class, 'logout']);
-
-// Route::get('/admin', function () {
-//     return view('admin.index', [
-//         'title' => 'Dashboard Admin | Cabs Online',
-//     ]);
-// })->middleware('auth');
-
-// Route::post('/admin/assign', [DriverController::class, 'assign'])
-//     ->middleware('auth');
-
-// Route::match(['get', 'post'], '/admin/assign-button', [DriverController::class, 'assignBtn'])
-//     ->middleware('auth');
-
-// Route::match(['get', 'post'], '/admin/search-button', [DriverController::class, 'searchBtn'])
-//     ->middleware('auth');
-
-// Route::get('/admin/all', [DriverController::class, 'showAll'])
-//     ->middleware('auth');
-
-// Route::get('/admin/recent', [DriverController::class, 'showRecent'])
-//     ->middleware('auth');
-
-// Route::get('/admin/avail', [DriverController::class, 'showAvail'])
-//     ->middleware('auth');
-
-
 Route::view('/','client.home',['title' => 'Cabs Online | Book A Taxi Ride With Us Today!']);
 Route::view('/about','client.about',['title' => 'Cabs Online | About']);
 Route::view('/services','client.services',['title' => 'Cabs Online | Services']);
@@ -127,9 +73,11 @@ Route::group(["prefix"=>"user","middleware"=>"auth"],function(){
     Route::prefix("admin")->group(function(){
         Route::get('/',[UserController::class,'show'])->name('user.admin.show');
         Route::post('/',[UserController::class,'ajax'])->name('user.admin.ajax');
+        Route::get('/create',[UserController::class,'create'])->name('user.admin.create');
         Route::post('/store',[UserController::class,'store'])->name('user.admin.store');
         Route::get('/{user}/edit',[UserController::class,'edit'])->name('user.admin.edit');
         Route::post('/update',[UserController::class,'update'])->name('user.admin.update');
+        Route::get('/{user}/delete',[UserController::class,'delete'])->name('user.admin.delete');
     });
 });
 Route::group(["prefix"=>"driver","middleware"=>"auth"],function(){
@@ -143,6 +91,24 @@ Route::group(["prefix"=>"driver","middleware"=>"auth"],function(){
         Route::get('/{driver}/delete',[DriverController::class,'delete'])->name('driver.admin.delete');
     });
 });
+Route::group(["prefix"=>"vehicle","middleware"=>"auth"],function(){
+    Route::prefix("admin")->group(function(){
+        Route::get('/',[VehicleController::class,'show'])->name('vehicle.admin.show');
+        Route::post('/',[VehicleController::class,'ajax'])->name('vehicle.admin.ajax');
+        Route::get('/create',[VehicleController::class,'create'])->name('vehicle.admin.create');
+        Route::post('/store',[VehicleController::class,'store'])->name('vehicle.admin.store');
+        Route::get('/{vehicle}/edit',[VehicleController::class,'edit'])->name('vehicle.admin.edit');
+        Route::post('/update',[VehicleController::class,'update'])->name('vehicle.admin.update');
+        Route::get('/{vehicle}/delete',[VehicleController::class,'delete'])->name('vehicle.admin.delete');
+    });
+});
+Route::group(["prefix"=>"administration","middleware"=>"auth"],function(){
+    Route::prefix("users")->group(function(){
+        Route::get('/',[AdministrationController::class,'show'])->name('administaration.user.show');
+        Route::post('/',[AdministrationController::class,'ajax'])->name('administaration.user.ajax');
+    });
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

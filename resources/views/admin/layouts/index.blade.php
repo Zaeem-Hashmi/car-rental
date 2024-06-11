@@ -88,6 +88,11 @@
     <script src="{{ asset('admin-asset/js') }}/datatable/vfs_fonts.js"></script>
     <script src="{{ asset('admin-asset/js') }}/datatable/buttons.html5.min.js"></script>
     <script src="{{ asset('admin-asset/js') }}/datatable/buttons.print.min.js"></script>
+    <script>
+        $("document").ready(function(){
+            $(".nav-item").removeClass("active");
+        })
+    </script>
     <!-- End custom js for this page-->
     @yield('script')
 </body>

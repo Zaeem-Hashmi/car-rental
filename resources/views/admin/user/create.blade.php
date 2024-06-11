@@ -1,13 +1,13 @@
 
 @extends('admin.layouts.index')
-@section('driver',"active_nav")
+@section('user',"active_nav")
 @section('content')
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-              <h2 class="card-title">Create New Driver</h2>
-              <form class="form-sample" action="{{ route('driver.admin.store') }}" method="POST">
+              <h2 class="card-title">Create New User</h2>
+              <form class="form-sample" action="{{ route('user.admin.store') }}" method="POST">
                 @csrf
                 <p class="card-description">
                   Personal info
@@ -45,50 +45,6 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <p class="card-description">
-                  Address
-                </p>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Address 1</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" name="address_1"/>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Address 2</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" name="address_2"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">City</label>
-                      <div class="col-sm-9">
-                        <input type="text" class="form-control" name="city"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p class="card-description">
-                Info    
-                </p>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Lisence Numner</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" name="lisence_number"/>
-                          </div>
-                        </div>
-                      </div>
                 </div>
                 <div class="row">
                     <div class="col-12">

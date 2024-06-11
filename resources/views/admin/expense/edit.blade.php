@@ -1,5 +1,5 @@
-
 @extends('admin.layouts.index')
+@section('expense',"active_nav")
 @section('content')
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">

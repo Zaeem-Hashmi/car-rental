@@ -1,12 +1,13 @@
+
 @extends('admin.layouts.index')
-@section('expense',"active_nav")
+@section('vehicle',"active_nav")
 @section('content')
 <div class="row">
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-              <h2 class="card-title">Create New Expense</h2>
-              <form class="form-sample" action="{{ route('admin.expense.store') }}" method="POST">
+              <h2 class="card-title">Create New Vehicle</h2>
+              <form class="form-sample" action="{{ route('vehicle.admin.store') }}" method="POST">
                 @csrf
                 <p class="card-description">
                     Driver Info
@@ -26,32 +27,46 @@
                       </div>
                 </div>
                 <p class="card-description">
-                  Expense Description
+                  Vehicle info
                 </p>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Expense type</label>
+                      <label class="col-sm-3 col-form-label">Name</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="expenseType"/>
+                        <input type="text" class="form-control" name="name"/>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Expense Amount</label>
+                      <label class="col-sm-3 col-form-label">Model</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="expenseAmount"/>
+                        <input type="text" class="form-control" name="model"/>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
                   <div class="col-md-6">
                     <div class="form-group row">
-                      <label class="col-sm-3 col-form-label">Expense Description</label>
+                      <label class="col-sm-3 col-form-label">Model Year</label>
                       <div class="col-sm-9">
-                        <textarea name="expenseDescription" cols="30" rows="10" class="form-control"></textarea>
+                        <input type="text" class="form-control" name="modelYear"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Color</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="color"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">Registration Number</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="regNumber"/>
                       </div>
                     </div>
                   </div>

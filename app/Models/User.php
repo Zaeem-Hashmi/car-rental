@@ -16,11 +16,7 @@ class User extends Authenticatable
     const DRIVER_ROLE = 2;
     const PASSENGER_ROLE = 3;
 
-    // protected $fillable = [
-    //     'email',
-    //     'username',
-    //     'password',
-    // ];
+   
     protected $guarded = [];
     protected $hidden = [
         'password',
@@ -38,5 +34,9 @@ class User extends Authenticatable
     public function expense()
     {
         return $this->hasMany(Expense::class);
+    }
+    public function vehicle()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }
