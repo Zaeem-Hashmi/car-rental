@@ -13,7 +13,11 @@ class ExpenseController extends Controller
         
     }
     public function ajax(User $user) {
-        
+        $expense = Expense::query();
+        $expense = $expense->with('driver');
+        $expense = $expense->where('user_id',auth()->user()->id);
+        return DataTables::eloquent($expense)
+            ->toJson();
     }
     public function store(Request $request) {
         

@@ -10,6 +10,7 @@
 
                 <h2 class="text-center" style="margin-top: -18px;"><strong>Create</strong> an account.</h2>
 
+                
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -50,7 +51,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <input type="password" name="confirm_password" placeholder="Password (repeat)"
+                    <input type="password" name="password_confirmation" placeholder="Password (repeat)"
                         class="form-control @error('confirm_password') is-invalid @enderror" required>
                     @error('confirm_password')
                         <div class="invalid-feedback">

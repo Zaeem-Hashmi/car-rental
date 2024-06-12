@@ -9,10 +9,20 @@
                 <li class="nav-item"><a class="nav-link" href="/#about">services</a></li>
                 <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary" role="button"
                         style="background: rgba(10,9,8,0.27);" href="/booking">Book A Ride</a></li>
-                <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary btn-book" role="button"
-                        href="/become-driver">Become A Driver</a></li>
-                <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary btn-login" role="button"
-                        href="/login" style="background: rgb(99,168,231);">Login</a></li>
+                        @auth
+                        <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary btn-login" role="button"
+                            href="#" style="background: rgb(99,168,231);" onclick="document.getElementById('logout').submit();">Logout</a></li>            
+                            <form action="/logout" method="post" hidden id="logout">
+                            @csrf
+                            </form>
+                        @endauth
+
+                        @guest
+                        <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary btn-book" role="button"
+                            href="/become-driver">Become A Driver</a></li>
+                        <li class="nav-item" style="margin-top: 10px;"><a class="btn btn-primary btn-login" role="button"
+                                href="/login" style="background: rgb(99,168,231);">Login</a></li>
+                        @endguest
             </ul>
         </div>
     </div>

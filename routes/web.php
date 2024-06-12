@@ -45,16 +45,17 @@ Route::group(["prefix"=>"booking","middleware"=>"auth"],function(){
         Route::get('/{booking}/cancel',[BookingController::class,'cancel'])->name('client.booking.cancel');
     });
     Route::prefix("driver")->group(function(){
-        Route::get('/{user}',[BookingController::class,'showByUserId'])->name('driver.booking.show');
-        Route::post('/{user}',[BookingController::class,'showByUserIdAjax'])->name('driver.booking.ajax');
+        Route::get('/',[BookingController::class,'showforBooking'])->name('driver.booking.show');
+        Route::post('/',[BookingController::class,'showforBookingAjax'])->name('driver.booking.ajax');
+        Route::post('/user',[BookingController::class,'bookingByUserAjax'])->name('driver.booking.user.ajax');
         Route::post('/{booking}/assign',[BookingController::class,'assign'])->name('driver.booking.assign');
     });
 });
 
 Route::group(["prefix"=>"expense","middleware"=>"auth"],function(){
     Route::prefix("driver")->group(function(){
-        Route::get('/{user}',[ExpenseController::class,'show'])->name('driver.expense.show');
-        Route::post('/{user}',[ExpenseController::class,'ajax'])->name('driver.expense.ajax');
+        Route::get('/',[ExpenseController::class,'show'])->name('driver.expense.show');
+        Route::post('/',[ExpenseController::class,'ajax'])->name('driver.expense.ajax');
         Route::post('/store',[ExpenseController::class,'store'])->name('driver.expense.store');
         Route::get('/{expense}/edit',[ExpenseController::class,'edit'])->name('driver.expense.edit');
         Route::post('/update',[ExpenseController::class,'update'])->name('driver.expense.update');
@@ -113,4 +114,5 @@ Route::group(["prefix"=>"administration","middleware"=>"auth"],function(){
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/driver/home', [App\Http\Controllers\HomeController::class, 'home'])->name('driver');
