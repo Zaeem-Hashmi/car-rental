@@ -160,7 +160,10 @@
                 'serverSide': true,
                 'ajax': {
                     'url': '{{ route('admin.booking.ajax') }}',
-                    'type': 'POST'
+                    'type': 'POST',
+                    'data':{
+                        'type':'booked'
+                    }
                 },
                 "columnDefs": [{
                     "orderable": false,

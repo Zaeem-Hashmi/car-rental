@@ -14,10 +14,42 @@ class BookingController extends Controller
     {
         return view('admin.booking.show');
     }
-    public function ajax()
+    public function ajax(Request $request)
     {
+        if ($request->type == "booked") {
+            return $this->allBookedRides();
+        }
+        if ($request->type == "unassigned") {
+            return $this->allUnassignedRides();
+        }
+        if ($request->type == "cancel") {
+            return $this->allCancelRides();
+        }
         $query = Booking::query();
         $query = $query->with("driver","passenger");
+        return DataTables::eloquent($query)
+            ->toJson();
+    }
+    public function allBookedRides(){
+        $query = Booking::query();
+        $query = $query->with("driver","passenger");
+        $query = $query->where("status","<>","unassigned");
+        $query = $query->where("driver_id","<>",null);
+        return DataTables::eloquent($query)
+            ->toJson();
+    }
+    public function allUnassignedRides(){
+        $query = Booking::query();
+        $query = $query->with("driver","passenger");
+        $query = $query->where("status","unassigned");
+        $query = $query->where("driver_id",null);
+        return DataTables::eloquent($query)
+            ->toJson();
+    }
+    public function allCancelRides(){
+        $query = Booking::query();
+        $query = $query->with("driver","passenger");
+        $query = $query->where("status","cancel");
         return DataTables::eloquent($query)
             ->toJson();
     }
@@ -88,6 +120,9 @@ class BookingController extends Controller
     {
         $booking = Booking::find($request->booking_id);
         $booking->status = $request->status;
+        if ($request->status == "unassigned") {
+            $booking->driver_id = null;
+         }
         $booking->save();
 
         return response()->json([
@@ -102,6 +137,9 @@ class BookingController extends Controller
         if ($request->status == "assigned") {
            $booking->driver_id = $request->user;
         }
+        if ($request->status == "unassigned") {
+            $booking->driver_id = null;
+         }
         $booking->save();
 
         return response()->json([
