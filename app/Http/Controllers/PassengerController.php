@@ -17,7 +17,7 @@ class PassengerController extends Controller
     public function index()
     {
         return view('booking.index', [
-            'title' => 'Book A Cab | Cabs Online',
+            'title' => 'Book A Cab | Urban Ride',
         ]);
     }
 
@@ -141,7 +141,7 @@ class PassengerController extends Controller
         $request->session()->put('carsNeed', $request['carsNeed']);
 
         return view('booking.index', [
-            'title' => 'Book A Cab | Cabs Online',
+            'title' => 'Book A Cab | Urban Ride',
         ]);
     }
 

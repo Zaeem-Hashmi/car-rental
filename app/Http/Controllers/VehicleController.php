@@ -55,4 +55,52 @@ class VehicleController extends Controller
         }
         return redirect()->route('vehicle.admin.show')->with("alert-success",$vehicle->name." has been deleted successfully.");
     }
+
+    public function driverShow()
+    {
+        return view('driver.vehicle.list');
+    }
+    public function driverAjax()
+    {
+        $query = Vehicle::query();
+        $query = $query->where("user_id",auth()->user()->id);
+        $query = $query->with("driver");
+        return DataTables::eloquent($query)
+            ->toJson();
+    }
+    public function driverCreate()
+    {
+        return view('driver.vehicle.create');
+    }
+    public function driverStore(Request $request)
+    {
+        $validate = $this->validate($request,[
+            'name'=>'required',
+            'user_id'=>'required',
+        ]);
+        $vehicle = Vehicle::create($request->except("_token"));
+        return redirect()->route('vehicle.driver.show')->with("alert-success",$vehicle->name." has been created successfully.");
+
+    }
+    public function driverEdit(Vehicle $vehicle)
+    {
+        return view('driver.vehicle.edit',compact('vehicle'));
+    }
+    public function driverUpdate(Request $request)
+    {
+        $vehicle = Vehicle::find($request->id);
+        $validate = $this->validate($request,[
+            'name'=>'required',
+            'user_id'=>'required',
+        ]);
+        $vehicle = $vehicle->update($request->except("_token"));
+        return redirect()->route('vehicle.driver.show')->with("alert-success",$request->name." has been updated successfully.");
+    }
+    public function driverDelete(Vehicle $vehicle)
+    {
+        if ($vehicle) {
+           $vehicle->delete();
+        }
+        return redirect()->route('vehicle.driver.show')->with("alert-success",$vehicle->name." has been deleted successfully.");
+    }
 }

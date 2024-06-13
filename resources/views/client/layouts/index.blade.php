@@ -5,10 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-    <title>{{ $title }}</title>
+    <title>{{ isset($title) ? $title : "Urban Ride"}}</title>
 
     <link rel="icon" type="image/x-icon" href="assets/img/taxi-logo.ico">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
     <link rel="stylesheet" href="assets/css/styles.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    @yield('css')
 
     <!-- Booking JS -->
     <script type="text/javascript" src="assets/js/booking.js"></script>

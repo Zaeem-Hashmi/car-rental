@@ -1,5 +1,10 @@
 @extends('client.layouts.index')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('admin-asset') }}/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+<link rel="stylesheet" href="{{ asset('admin-asset') }}/vendors/ti-icons/css/themify-icons.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('admin-asset') }}/js/select.dataTables.min.css">
+@endsection
 @section('container')
     <!-- Start: Contact Form Clean -->
     <section class="contact-clean">
@@ -53,7 +58,7 @@
                             </script>
                         @endif
 
-                        @if (session()->has('cancelSuccess'))
+                        @if (session()->has('cancel'))
                             <script>
                                 Swal.fire(
                                     'Canceled Success!',
@@ -65,23 +70,27 @@
 
                         <div class="mb-3">
                             <p><strong>Pickup Unit Number</strong></p>
-                                <input type="text" class="form-control @error('pk-unit-numer') is-invalid @enderror" name="pk-unit-numer" placeholder="🏡 Enter your pickup unit numer" value="{{ old('pk-unit-numer') }}">
+                                <input type="text" class="form-control @error('pk_unit_numer') is-invalid @enderror" name="pk_unit_numer" placeholder="🏡 Enter your pickup unit numer" value="{{ old('pk_unit_numer') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Pickup Street Number</strong></p>
-                                <input type="text" class="form-control @error('pk-street-number') is-invalid @enderror" name="pk-street-number" placeholder="🏡 Enter your pickup street number" value="{{ old('pk-street-number') }}">
+                                <input type="text" class="form-control @error('pk_street_number') is-invalid @enderror" name="pk_street_number" placeholder="🏡 Enter your pickup street number" value="{{ old('pk_street_number') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Pickup Street Name</strong><br></p>
-                            <input type="text" class="form-control @error('pk-street-name') is-invalid @enderror" name="pk-street-name" placeholder="🏡 Enter your pickup street name" value="{{ old('pk-street-name') }}">
+                            <input type="text" class="form-control @error('pk_street_name') is-invalid @enderror" name="pk_street_name" placeholder="🏡 Enter your pickup street name" value="{{ old('pk_street_name') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Pickup area Name</strong><br></p>
-                            <input type="text" class="form-control @error('pk-area') is-invalid @enderror" name="pk-area" placeholder="🏡 Enter your pickup area" value="{{ old('pk-area') }}">
+                            <input type="text" class="form-control @error('pk_area') is-invalid @enderror" name="pk_area" placeholder="🏡 Enter your pickup area" value="{{ old('pk_area') }}">
+                        </div>
+                        <div class="mb-3">
+                            <p><strong>Pickup City Name</strong><br></p>
+                            <input type="text" class="form-control @error('pk_city') is-invalid @enderror" name="pk_city" placeholder="🏡 Enter your pickup city" value="{{ old('pk_city') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Destination Unit Number</strong></p>
-                                <input type="text" class="form-control @error('dp-unit-numer') is-invalid @enderror" name="dp-unit-numer" placeholder="🏙️ Enter your Drop-off unit numer" value="{{ old('dp-unit-numer') }}">
+                                <input type="text" class="form-control @error('dp_unit_numer') is-invalid @enderror" name="dp_unit_numer" placeholder="🏙️ Enter your Drop-off unit numer" value="{{ old('dp_unit_numer') }}">
                             @error('unitNumber')
                                 <div class="invalid-feedback">
                                     {{ $message }}
@@ -90,24 +99,27 @@
                         </div>
                         <div class="mb-3">
                             <p><strong>Destination Street Number</strong></p>
-                                <input type="text" class="form-control @error('dp-street-number') is-invalid @enderror" name="dp-street-number" placeholder="🏙️ Enter your Drop-off street number" value="{{ old('dp-street-number') }}">
+                                <input type="text" class="form-control @error('dp_street_number') is-invalid @enderror" name="dp_street_number" placeholder="🏙️ Enter your Drop-off street number" value="{{ old('dp_street_number') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Destination Street Name</strong><br></p>
-                            <input type="text" class="form-control @error('dp-street-name') is-invalid @enderror" name="dp-street-name" placeholder="🏙️ Enter your Drop-off street name" value="{{ old('dp-street-name') }}">
+                            <input type="text" class="form-control @error('dp_street_name') is-invalid @enderror" name="dp_street_name" placeholder="🏙️ Enter your Drop-off street name" value="{{ old('dp_street_name') }}">
                         </div>
                         <div class="mb-3">
                             <p><strong>Destination area Name</strong><br></p>
-                            <input type="text" class="form-control @error('dp-area') is-invalid @enderror" name="dp-area" placeholder="🏙️ Enter your Drop-off area" value="{{ old('dp-area') }}">
+                            <input type="text" class="form-control @error('dp_area') is-invalid @enderror" name="dp_area" placeholder="🏙️ Enter your Drop-off area" value="{{ old('dp_area') }}">
                         </div>
-
+                        <div class="mb-3">
+                            <p><strong>Dropoff City Name</strong><br></p>
+                            <input type="text" class="form-control @error('dp_city') is-invalid @enderror" name="dp_city" placeholder="🏡 Enter your pickup city" value="{{ old('dp_city') }}">
+                        </div>
                         <div class="mb-3">
                             <p><strong>Pick-Up Date</strong><br></p>
                             @php
                             $dateTime = new DateTime('now', new DateTimeZone('Asia/Karachi'));
                             @endphp
-                            <input class="form-control form-control-lg @error('pickUpTime') is-invalid @enderror"
-                                type="date" id="pickUpTime" name="pickUpTime" required
+                            <input class="form-control form-control-lg @error('pk_date') is-invalid @enderror"
+                                type="date" id="pickUpdate" name="pk_date" required
                                 value={{ $dateTime->format('Y-m-d') }}>
                            
                         </div>
@@ -117,8 +129,8 @@
                             @endphp
 
                             <p><strong>Pick-Up Time</strong><br></p>
-                                <input class="form-control form-control-lg @error('pickUpTime') is-invalid @enderror"
-                                    type="time" id="pickUpTime" name="pickUpTime" required
+                                <input class="form-control form-control-lg @error('pk_time') is-invalid @enderror"
+                                    type="time" id="pk_time" name="pk_time" required
                                     value={{ $dateTime->format('H:i A') }}>
                         </div>
                         <div class="d-flex d-xxl-flex justify-content-xxl-center mb-3">
@@ -141,8 +153,100 @@
                     </section>
                 </div>
             </div>
+            @auth
+            <div class="container shadow bg-light p-5 mt-5 rounded"> 
+                <div class="table-responsive">
+                    <h3>
+                        {{ auth()->user()->username }} Rides
+                    </h3>
+                    <table class="table table-hover" id="rides">
+                        <thead>
+                            <tr class="bg-warning text-light">
+                                <th>Driver Name</th>
+                                <th>Driver Email</th>
+                                <th>PickUp Address</th>
+                                <th>DropOff Address</th>
+                                <th>Ride Cost</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endauth
+            
         </div>
 
     </section>
     <!-- End: Contact Form Clean -->
+@endsection
+
+@section('scripts')
+<script src="{{ asset('admin-asset') }}/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="{{ asset('admin-asset') }}/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+<script src="{{ asset('admin-asset') }}/js/dataTables.select.min.js"></script>
+<script>
+     $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#rides').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'searching':false,
+                'ajax': {
+                    'url': '{{ route('client.booking.ajax') }}',
+                    'type': 'POST'
+                },
+                "columnDefs": [{
+                    "orderable": false,
+                    "targets": [0]
+                }, ],
+                "columns": [
+                    {
+                        "data":"driver",
+                        "render":function(data,type,row){
+                            return data ? data.username : "Not Assigned";
+                        }
+                    },
+                    {
+                        "data":"driver",
+                        "render":function(data,type,row){
+                            return data ? data.email : "Not Assigned";
+                        }
+                    },
+                    {
+                        "data":"id",
+                        "render":function(data,type,row) {
+                            return `Street Number ${row.pickupStreetNumber}, House Number ${row.pickupUnitNumber}, Street name ${row.pickupStreetName}, ${row.pickupAreaName}, ${row.pickupCity}`;
+                        }
+                    },
+                    {
+                        "data":"id",
+                        "render":function(data,type,row) {
+                            return `Street Number ${row.dropoffStreetNumber}, House Number ${row.dropoffUnitNumber}, Street name ${row.pickupStreetName}, ${row.dropoffAreaName}, ${row.dropoffCity}`;
+                        }
+                    },
+                    {
+                        "data":"cost",
+                    },
+                    {
+                        "data":"status",
+                    },
+                    {
+                        "data":"id",
+                        "render":function(data,type,row){
+                            return `<a href="{{ route('client.booking.cancel','data') }}" class="text-primary"><i class="fas fa-times"></i></a>`.replaceAll("data",row.id)
+                        }
+                    },
+                ]
+            });
+        });
+</script>
 @endsection

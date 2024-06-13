@@ -123,64 +123,7 @@
     <section class="highlight-phone" style="background: rgb(255,192,0);">
         <div id="booking-cta" class="container text-center">
             <h3>Book A Ride Now</h3>
-            <form class="row g-3" method="POST" action="continue-booking">
-                @csrf
-
-                <div class="mb-3">
-                    <div class="form-check form-check-inline">
-                        <label>
-                            <input class="form-check-input" type="radio" name="carsNeed" id="carsNeed"
-                                value="Scooter" required>
-                            <img src="assets/img/cars/Scooter.png" alt="Car 1">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label>
-                            <input class="form-check-input" type="radio" name="carsNeed" id="carsNeed"
-                                value="Hatchback" required>
-                            <img src="assets/img/cars/Hatchback.png" alt="Car 2">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label>
-                            <input class="form-check-input" type="radio" name="carsNeed" id="carsNeed"
-                                value="Suv" checked required>
-                            <img src="assets/img/cars/Suv.png" alt="Car 3">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label>
-                            <input class="form-check-input" type="radio" name="carsNeed" id="carsNeed"
-                                value="Sedan" required>
-                            <img src="assets/img/cars/Sedan.png" alt="Car 4">
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label>
-                            <input class="form-check-input" type="radio" name="carsNeed" id="carsNeed"
-                                value="Van" required>
-                            <img src="assets/img/cars/Van.png" alt="Car 5">
-                        </label>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <input type="text" class="form-control" id="sbname" placeholder="🏡 From Address..." name="sbname">
-                </div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" id="dsbname" placeholder="🏡 To..." name="dsbname">
-                </div>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="☎️ Phone Number" id="phone" name="phone">
-                </div>
-                <div class="col-md-3">
-                    <input type="date" class="form-control" id="pickUpDate" name="pickUpDate">
-                </div>
-                <div class="col-12">
-                    <input class="btn btn-dark btn-lg" type="submit" name="book-button" style="border-radius: 40px;;"
-                        value="Book A Ride">
-                </div>
-            </form>
+            <a href="/booking" class="btn btn-dark rounded rounded-pill">Book now</a>
         </div>
     </section><!-- End: Highlight Phone -->
     <!-- Start: Highlight Phone -->
@@ -240,7 +183,7 @@
                     </div><!-- End: Intro -->
                 </div>
                 <div class="col-sm-4">
-                    <a class="btn btn-lg btn-dark driver-btn" role="button" href="/register">Become A Driver</a>
+                    <a class="btn btn-lg btn-dark driver-btn" role="button" href="/become-driver">Become A Driver</a>
                 </div>
             </div>
         </div>

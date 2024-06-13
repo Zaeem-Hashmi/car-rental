@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Ramsey\Uuid\Uuid;
 use Yajra\DataTables\Facades\DataTables;
 
 class BookingController extends Controller
@@ -73,18 +74,53 @@ class BookingController extends Controller
         return DataTables::eloquent($query)
             ->toJson();
     }
+    public function showPassengerBooking()
+    {
+        return view('client.ride-list');
+    }
+    public function showPassengerAjax()
+    {
+        $query = Booking::query();
+        $query = $query->with("driver","passenger");
+        $query = $query->where("user_id",auth()->user()->id);
+        return DataTables::eloquent($query)
+            ->toJson();
+    }
     public function store(Request $request)
     {
-        dd($request->all());
         $validate = $request->validate([
-
+            "pk_unit_numer"=>"required",
+            "pk_street_number"=>"required",
+            "pk_area"=>"required",
+            "pk_time"=>"required",
+            "pk_date"=>"required",
         ]);
-
         $booking = new Booking();
 
-        $booking->save();
-    }
+            $booking->user_id=auth()->user()->id;
+            $booking->bookingRefNo=Uuid::uuid4()->toString();
+            $booking->pickupUnitNumber=$request->pk_unit_numer;
+            $booking->pickupStreetNumber=$request->pk_street_number;
+            $booking->pickupStreetName=$request->pk_street_name;
+            $booking->pickupAreaName=$request->pk_area;
+            $booking->pickupCity=$request->pk_city;
+            $booking->pickupDate=$request->pk_date;
+            $booking->pickupTime=$request->pk_time;
+            $booking->dropoffUnitNumber=$request->dp_unit_number;
+            $booking->dropoffStreetNumber=$request->dp_street_number;
+            $booking->dropoffStreetName=$request->dp_street_name;
+            $booking->dropoffAreaName=$request->dp_area;
+            $booking->dropoffCity=$request->dp_city;
+            $booking->status="unassigned";
+            $booking->save();
 
+            return redirect()->back()->with("success","Booking successful");
+    }
+    public function cancel(Booking $booking) {
+        $booking->status = "cancel";
+        $booking->save();
+        return redirect()->back()->with("cancel","Booking cancel Successfully");
+    }
     public function storeByAdmin(Request $request)
     {
         $validate = $request->validate([

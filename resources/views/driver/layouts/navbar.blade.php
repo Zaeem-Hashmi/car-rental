@@ -12,14 +12,14 @@
               <span class="menu-title">Booking</span>
           </a>
       </li>
-      <li class="nav-item @yield('expense') rounded">
+      {{-- <li class="nav-item @yield('expense') rounded">
         <a class="nav-link" href="{{ route('driver.expense.show') }}">
           <i class="icon-columns menu-icon"></i>
             <span class="menu-title">Expense</span>
         </a>
-    </li>
+    </li> --}}
   <li class="nav-item @yield('vehicle') rounded">
-    <a class="nav-link" href="">
+    <a class="nav-link" href="{{ route('vehicle.driver.show') }}">
       <i class="fa fa-taxi menu-icon"></i>
         <span class="menu-title">Vehicles</span>
     </a>

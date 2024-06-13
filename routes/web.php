@@ -21,13 +21,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
-Route::view('/','client.home',['title' => 'Cabs Online | Book A Taxi Ride With Us Today!']);
-Route::view('/about','client.about',['title' => 'Cabs Online | About']);
-Route::view('/services','client.services',['title' => 'Cabs Online | Services']);
-Route::view('/become-driver','client.driver',['title' => 'Cabs Online | Become a Driver']);
-Route::view('/login','auth.login',['title' => 'Cabs Online | Sing In']);
-Route::view('/register','auth.register',['title' => 'Cabs Online | Sing Up']);
-Route::view('/booking','client.ride',['title' => 'Cabs Online | Book a Ride']);
+Route::view('/','client.home',['title' => 'Urban Ride | Book A Taxi Ride With Us Today!']);
+Route::view('/about','client.about',['title' => 'Urban Ride | About']);
+Route::view('/services','client.services',['title' => 'Urban Ride | Services']);
+Route::view('/become-driver','client.driver',['title' => 'Urban Ride | Become a Driver']);
+Route::view('/login','auth.login',['title' => 'Urban Ride | Sing In']);
+Route::view('/register','auth.register',['title' => 'Urban Ride | Sing Up']);
+Route::view('/booking','client.ride',['title' => 'Urban Ride | Book a Ride']);
 
 Route::group(["prefix"=>"booking","middleware"=>"auth"],function(){
     Route::prefix("admin")->group(function(){
@@ -39,8 +39,8 @@ Route::group(["prefix"=>"booking","middleware"=>"auth"],function(){
         Route::post('/status',[BookingController::class,'status'])->name('admin.booking.status');
     });
     Route::prefix("client")->group(function(){
-        Route::get('/{user}',[BookingController::class,'showByUserId'])->name('client.booking.show');
-        Route::post('/{user}',[BookingController::class,'showByUserIdAjax'])->name('client.booking.ajax');
+        Route::get('/',[BookingController::class,'showPassengerBooking'])->name('client.booking.show');
+        Route::post('/',[BookingController::class,'showPassengerAjax'])->name('client.booking.ajax');
         Route::post('/store',[BookingController::class,'store'])->name('client.booking.store');
         Route::get('/{booking}/cancel',[BookingController::class,'cancel'])->name('client.booking.cancel');
     });
@@ -102,6 +102,15 @@ Route::group(["prefix"=>"vehicle","middleware"=>"auth"],function(){
         Route::get('/{vehicle}/edit',[VehicleController::class,'edit'])->name('vehicle.admin.edit');
         Route::post('/update',[VehicleController::class,'update'])->name('vehicle.admin.update');
         Route::get('/{vehicle}/delete',[VehicleController::class,'delete'])->name('vehicle.admin.delete');
+    });
+    Route::prefix("driver")->group(function(){
+        Route::get('/',[VehicleController::class,'driverShow'])->name('vehicle.driver.show');
+        Route::post('/',[VehicleController::class,'driverAjax'])->name('vehicle.driver.ajax');
+        Route::get('/create',[VehicleController::class,'driverCreate'])->name('vehicle.driver.create');
+        Route::post('/store',[VehicleController::class,'driverStore'])->name('vehicle.driver.store');
+        Route::get('/{vehicle}/edit',[VehicleController::class,'driverEdit'])->name('vehicle.driver.edit');
+        Route::post('/update',[VehicleController::class,'driverUpdate'])->name('vehicle.driver.update');
+        Route::get('/{vehicle}/delete',[VehicleController::class,'driverDelete'])->name('vehicle.driver.delete');
     });
 });
 Route::group(["prefix"=>"administration","middleware"=>"auth"],function(){
