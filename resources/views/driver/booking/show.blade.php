@@ -55,6 +55,7 @@
                                         <th>Dropoff Date</th>
                                         <th>Dropoff Time</th>
                                         <th style="width: 150px">Ride Status</th>
+                                        <th style="width: 100px">Cost</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -128,12 +129,7 @@
                                 </select>`
                         }
                     },
-                    // {
-                    //     "data":"id",
-                    //     "render":function(data,type,row){
-                    //         return `<a href="{{ route('user.admin.delete','data') }}" class="text-primary"><i class="fas fa-trash-alt"></i></a>`.replaceAll("data",row.id)
-                    //     }
-                    // },
+                    
                 ]
             });
             table2 = $('#booked').DataTable({
@@ -197,12 +193,12 @@
                                 </select>`
                         }
                     },
-                    // {
-                    //     "data":"id",
-                    //     "render":function(data,type,row){
-                    //         return `<a href="#" class="text-primary"><i class="fas fa-trash-alt"></i></a>`
-                    //     }
-                    // },
+                    {
+                        "data":"cost",
+                        "render":function(data,type,row){
+                            return `<input class="form-control" type="text" value="${data}" id="cost-${row.id}">`;
+                        }
+                    },
                 ]
             });
             });
@@ -219,7 +215,8 @@
                     data:{
                         "status":$(`#status-${id}`).val(),
                         "booking_id":id,
-                        "user":{{ auth()->user()->id }}
+                        "user":{{ auth()->user()->id }},
+                        "cost":$(`#cost-${id}`).val()
                     }
                 })
                 .done(function(response) {

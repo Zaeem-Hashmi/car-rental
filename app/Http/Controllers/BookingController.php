@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\User;
+use App\Notifications\DriverNotification;
+use App\Notifications\RidebookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Ramsey\Uuid\Uuid;
@@ -114,6 +116,12 @@ class BookingController extends Controller
             $booking->status="unassigned";
             $booking->save();
 
+            $user = User::find(Auth::user()->id);
+            $user->notify(new RidebookingNotification);
+            $drivers = User::where("role_id",2)->get();
+            foreach ($drivers as $key => $driver) {
+                $driver->notify(new DriverNotification());
+            }
             return redirect()->back()->with("success","Booking successful");
     }
     public function cancel(Booking $booking) {
@@ -175,6 +183,9 @@ class BookingController extends Controller
         }
         if ($request->status == "unassigned") {
             $booking->driver_id = null;
+         }
+         if ($request->status == "complete") {
+            $booking->cost = $request->cost;
          }
         $booking->save();
 
